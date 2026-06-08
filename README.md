@@ -78,7 +78,7 @@ The last button simply tells every attached module to exit, performs a cleanup t
 
 ### Configuring the launcher: Launcher/Settings
 By pressing the [%] button, a new window will open. This is the settings GUI for the launcher
-The following settings and buttons appear:
+The following settings and buttons appear:\n
 **All tabs:**
 Save/Load: Saves the current settings to a settings file or loads the settings from there
 **Settings tab:**
