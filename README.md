@@ -47,13 +47,13 @@ Some modules may require these or other capabilities to function properly. If Ne
 When installing Nemesis, by default a shortcut is created in the same folder as the Installer. Use that shortcut to open Nemesis  
 For portable versions, simply run the Nemesisv{version}.exe file from the cloned repository's folder.  
 Upon starting, Nemesis checks for multiple things  
-- whether it is installed or not (current directory, install directories)
-- log directory and the ability to write logs
-- asset and module directory for essential files
-- current elevation level
-- whether it is running the latest version
-- the ability to generate hashes through WinAPI
-- the ability to fetch databases online
+- whether it is installed or not (current directory, install directories)  
+- log directory and the ability to write logs  
+- asset and module directory for essential files  
+- current elevation level  
+- whether it is running the latest version  
+- the ability to generate hashes through WinAPI  
+- the ability to fetch databases online  
 Warning and info messages are shown depending on the outputs of these checks. Some warnings terminate the app (version, hash generation, databases), the rest just show and warning and restrict some functions.  
 After this, the host device is validated. If the custom Device ID is not specifically listed as banned, the app proceeds.
 Upon initializing, if there is no settings file indicating that a previous instance has been run before, a welcome message is shown with essential information.
@@ -82,19 +82,19 @@ The following settings and buttons appear:
 **All tabs:**  
 Save/Load: Saves the current settings to a settings file or loads the settings from there  
 **Settings tab:**  
-- Auto-attach: runs the attach command a few milliseconds after a full initialization. Automatically attaches modules that get launched by Nemesis.
-- Silent Startup: Nemesis suppresses all errors and warnings when starting. Also doesn't show any GUI when initialized or when attaching new modules. (Forced TRUE by Perforamce mode)
-- Prevent logging: Suppresses the logging mechanism, only allowing it to write the Init logs and essential entries.
-- Auto-login (developer mode only): Automatically passes the last valid username to the login panel and logs the user in during Init
-- Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher
-- Display warnings: If disabled, no error prompts and popups are shown. (Forced FALSE by Performance mode)
-- First launch message: If enabled, displays the welcome message on startup.
+- Auto-attach: runs the attach command a few milliseconds after a full initialization. Automatically attaches modules that get launched by Nemesis.  
+- Silent Startup: Nemesis suppresses all errors and warnings when starting. Also doesn't show any GUI when initialized or when attaching new modules. (Forced TRUE by Perforamce mode)  
+- Prevent logging: Suppresses the logging mechanism, only allowing it to write the Init logs and essential entries.  
+- Auto-login (developer mode only): Automatically passes the last valid username to the login panel and logs the user in during Init  
+- Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher  
+- Display warnings: If disabled, no error prompts and popups are shown. (Forced FALSE by Performance mode)  
+- First launch message: If enabled, displays the welcome message on startup.  
 **Configuration tab:**  
-- Export/Import: Exports the current settings to a file or imports existing settings from another
-- Command check interal: Overrides the default 150ms loop interval between two checks for commands (applies to modules as well)
-- Run at startup: Adds a shortcut to the `Shell:startup` folder that launches Nemesis after Windows boots
+- Export/Import: Exports the current settings to a file or imports existing settings from another  
+- Command check interal: Overrides the default 150ms loop interval between two checks for commands (applies to modules as well)  
+- Run at startup: Adds a shortcut to the `Shell:startup` folder that launches Nemesis after Windows boots  
 **Developer settings tab:**  
-- Enable developer mode: Displays a login window for testers or developers to log in. Developer perks are elaborated later.
+- Enable developer mode: Displays a login window for testers or developers to log in. Developer perks are elaborated later.  
 
 TO BE CONTINUED
 EOF
