@@ -59,13 +59,18 @@ After this, the host device is validated. If the custom Device ID is not specifi
 Upon initializing, if there is no settings file indicating that a previous instance has been run before, a welcome message is shown with essential information.
 ### The launcher itself, the main GUI
 Once initialized, a window will appear on the bottom right side of your screen.  
+  
 <img width="615" height="319" alt="image" src="https://github.com/user-attachments/assets/bed1acba-ddfa-4bc8-8032-24d7476ed7fc" />  
+  
 This window is the launcher, also called main GUI. You can hide/show this GUI by pressing Control+Tab, minimize it by pressing the [_] button and close it with the [X] button.  
 The [%] button leads to the settings menu, which is described in detail in the second paragraph  
   
-On the right side of the GUI, a large image resembling an eye can be seen. This, besides being our icon, is also serving a purpose as a status indicator. If any modules are attached, it changes it's color to green.  
+On the right side of the GUI, a large image resembling an eye can be seen. This, besides being our icon, is also serving a purpose as a status indicator. If any modules are attached, it changes it's color to green.
+  
 <img width="617" height="319" alt="image" src="https://github.com/user-attachments/assets/7518ba11-e073-44b2-8e03-0e663ce77030" />  
+  
 Or if an attach request failed (no modules were running at the time of the attach command), it changes to red.  
+  
 <img width="616" height="320" alt="image" src="https://github.com/user-attachments/assets/5781b0da-de29-49bb-b62c-941fb9ded7f9" />  
   
 The attacher currently recognizes 12 modules. Out of which, 6 are available for commercial use, and 6 are only accessible to developers and testers  
@@ -79,8 +84,10 @@ The last button simply tells every attached module to exit, performs a cleanup t
 ### Configuring the launcher: Launcher/Settings
 By pressing the [%] button, a new window will open. This is the settings GUI for the launcher  
 The following settings and buttons appear:  
+  
 **All tabs:**  
-Save/Load: Saves the current settings to a settings file or loads the settings from there  
+- Save/Load: Saves the current settings to a settings file or loads the settings from there
+  
 **Settings tab:**  
 - Auto-attach: runs the attach command a few milliseconds after a full initialization. Automatically attaches modules that get launched by Nemesis.  
 - Silent Startup: Nemesis suppresses all errors and warnings when starting. Also doesn't show any GUI when initialized or when attaching new modules. (Forced TRUE by Perforamce mode)  
@@ -88,11 +95,13 @@ Save/Load: Saves the current settings to a settings file or loads the settings f
 - Auto-login (developer mode only): Automatically passes the last valid username to the login panel and logs the user in during Init  
 - Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher  
 - Display warnings: If disabled, no error prompts and popups are shown. (Forced FALSE by Performance mode)  
-- First launch message: If enabled, displays the welcome message on startup.  
+- First launch message: If enabled, displays the welcome message on startup.
+  
 **Configuration tab:**  
 - Export/Import: Exports the current settings to a file or imports existing settings from another  
 - Command check interal: Overrides the default 150ms loop interval between two checks for commands (applies to modules as well)  
-- Run at startup: Adds a shortcut to the `Shell:startup` folder that launches Nemesis after Windows boots  
+- Run at startup: Adds a shortcut to the `Shell:startup` folder that launches Nemesis after Windows boots
+  
 **Developer settings tab:**  
 - Enable developer mode: Displays a login window for testers or developers to log in. Developer perks are elaborated later.  
 
