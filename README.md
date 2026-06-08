@@ -18,7 +18,7 @@ Initially, one would think transparency and closed-source are conflicting terms.
 We have multiple open-source projects, both older and newer. Our current public list consists of: **RemappX** (keyboard remapping utility), **XORCrypt** (portable text encryptor tool) and **FileGovernor** (startup manager and launcher utility)
 ## What data are collected?
 Nemesis constructs unique device IDs for every device that uses the launcher. Our logger includes the device ID and the login timestamps. Device IDs are only used for the ban system, they do not serve telemetry purposes.
-
+  
 # Installing and using Nemesis Project
 ## Installing and maintenace
 Installing Nemesis can be done in multiple ways.  
@@ -34,14 +34,14 @@ Portable mode is a compatibility tool to allow running Nemesis without installin
 - Saving configurations is also disabled (no config folder is created - though exporting and importing is still fully functional)
 - Sometimes, on certain devices, running without admin causes the script to not be able to acquire the lock file. This can also occur with portable mode
 Updating portable versions is done by simply cloning the updated repository again and deleting the old files.  
-
+  
 ### Nemesis: Installed mode
 Nemesis is designed to work properly when installed. This allows it to save configurations, write session logs and save its state on the device. This way, Nemesis can also be updated without having to clone the full repository again. The updater preserves configurations, removes logs, cache files and outdated executables and replaces them with the latest ones.  
 However, for some functions to work consistently, elevated permissions are recommended. These are:  
 - Hash generation through WinAPI (Device ID / Ban system / Module authenticator)
 - Writing/Reading cache files (Transfer file for sending commands to modules / Lock file / Configuration files)
 Some modules may require these or other capabilities to function properly. If Nemesis runs/opens the modules itself, then the permissions will be inherited (due to how WinAPI permission elevation inheritance works).
-
+  
 ## Using Nemesis Project
 ### Initialization
 When installing Nemesis, by default a shortcut is created in the same folder as the Installer. Use that shortcut to open Nemesis  
@@ -62,12 +62,12 @@ Once initialized, a window will appear on the bottom right side of your screen.
 <img width="615" height="319" alt="image" src="https://github.com/user-attachments/assets/bed1acba-ddfa-4bc8-8032-24d7476ed7fc" />  
 This window is the launcher, also called main GUI. You can hide/show this GUI by pressing Control+Tab, minimize it by pressing the [_] button and close it with the [X] button.  
 The [%] button leads to the settings menu, which is described in detail in the second paragraph  
-
+  
 On the right side of the GUI, a large image resembling an eye can be seen. This, besides being our icon, is also serving a purpose as a status indicator. If any modules are attached, it changes it's color to green.  
 <img width="617" height="319" alt="image" src="https://github.com/user-attachments/assets/7518ba11-e073-44b2-8e03-0e663ce77030" />  
 Or if an attach request failed (no modules were running at the time of the attach command), it changes to red.  
 <img width="616" height="320" alt="image" src="https://github.com/user-attachments/assets/5781b0da-de29-49bb-b62c-941fb9ded7f9" />  
-
+  
 The attacher currently recognizes 12 modules. Out of which, 6 are available for commercial use, and 6 are only accessible to developers and testers  
 Attaching is the first and most important command for Nemesis. This command checks for modules, attaches them to make them monitor the command log and respond in real-time.  
 The second command is Flash, which tells every module to check for a relay file, which contains information that has to be sent between two modules, and load the information from that file into their cache.  
@@ -75,13 +75,13 @@ The third command sends every attached module a command to exit. The modules rea
 The fourth command simply launches the executables of the modules. Due to the `#SingleInstance, force` paramenter, this will close any previous instance of the modules and open them fresh.  
 The fifth command is very similar to the third one, but this one sends a command to reload. This means the processes don't quit, but they restart themselves from the beginning, as if they were just launched.  
 The last button simply tells every attached module to exit, performs a cleanup task, then exits Nemesis itself.  
-
+  
 ### Configuring the launcher: Launcher/Settings
-By pressing the [%] button, a new window will open. This is the settings GUI for the launcher
-The following settings and buttons appear:
-**All tabs:**
-Save/Load: Saves the current settings to a settings file or loads the settings from there
-**Settings tab:**
+By pressing the [%] button, a new window will open. This is the settings GUI for the launcher  
+The following settings and buttons appear:  
+**All tabs:**  
+Save/Load: Saves the current settings to a settings file or loads the settings from there  
+**Settings tab:**  
 - Auto-attach: runs the attach command a few milliseconds after a full initialization. Automatically attaches modules that get launched by Nemesis.
 - Silent Startup: Nemesis suppresses all errors and warnings when starting. Also doesn't show any GUI when initialized or when attaching new modules. (Forced TRUE by Perforamce mode)
 - Prevent logging: Suppresses the logging mechanism, only allowing it to write the Init logs and essential entries.
@@ -89,11 +89,11 @@ Save/Load: Saves the current settings to a settings file or loads the settings f
 - Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher
 - Display warnings: If disabled, no error prompts and popups are shown. (Forced FALSE by Performance mode)
 - First launch message: If enabled, displays the welcome message on startup.
-**Configuration tab:**
+**Configuration tab:**  
 - Export/Import: Exports the current settings to a file or imports existing settings from another
 - Command check interal: Overrides the default 150ms loop interval between two checks for commands (applies to modules as well)
 - Run at startup: Adds a shortcut to the `Shell:startup` folder that launches Nemesis after Windows boots
-**Developer settings tab:**
+**Developer settings tab:**  
 - Enable developer mode: Displays a login window for testers or developers to log in. Developer perks are elaborated later.
 
 TO BE CONTINUED
