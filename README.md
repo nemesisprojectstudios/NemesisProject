@@ -29,10 +29,11 @@ Installing Nemesis can be done in multiple ways.
 If you don't want to, or can't install Nemesis, it also supports **Portable mode**  
 ### Nemesis: Portable mode
 Portable mode is a compatibility tool to allow running Nemesis without installing it, and no administrator is required. Nemesis will work out of the box, fully inside it's provided directory. However, this comes with several drawbacks:  
-- Logging is disabled (no logs folder is created)
-- Sending debug logs sends corrupted files full of chinese characters
-- Saving configurations is also disabled (no config folder is created - though exporting and importing is still fully functional)
-- Sometimes, on certain devices, running without admin causes the script to not be able to acquire the lock file. This can also occur with portable mode
+- Logging is disabled (no logs folder is created)  
+- Sending debug logs sends corrupted files full of chinese characters  
+- Saving configurations is also disabled (no config folder is created - though exporting and importing is still fully functional)  
+- Sometimes, on certain devices, running without admin causes the script to not be able to acquire the lock file. This can also occur with portable mode  
+  
 Updating portable versions is done by simply cloning the updated repository again and deleting the old files.  
   
 ### Nemesis: Installed mode
@@ -40,6 +41,7 @@ Nemesis is designed to work properly when installed. This allows it to save conf
 However, for some functions to work consistently, elevated permissions are recommended. These are:  
 - Hash generation through WinAPI (Device ID / Ban system / Module authenticator)
 - Writing/Reading cache files (Transfer file for sending commands to modules / Lock file / Configuration files)
+  
 Some modules may require these or other capabilities to function properly. If Nemesis runs/opens the modules itself, then the permissions will be inherited (due to how WinAPI permission elevation inheritance works).
   
 ## Using Nemesis Project
@@ -53,7 +55,8 @@ Upon starting, Nemesis checks for multiple things
 - current elevation level  
 - whether it is running the latest version  
 - the ability to generate hashes through WinAPI  
-- the ability to fetch databases online  
+- the ability to fetch databases online
+  
 Warning and info messages are shown depending on the outputs of these checks. Some warnings terminate the app (version, hash generation, databases), the rest just show and warning and restrict some functions.  
 After this, the host device is validated. If the custom Device ID is not specifically listed as banned, the app proceeds.
 Upon initializing, if there is no settings file indicating that a previous instance has been run before, a welcome message is shown with essential information.
