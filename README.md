@@ -39,10 +39,46 @@ Updating portable versions is done by simply cloning the updated repository agai
 ### Nemesis: Installed mode
 Nemesis is designed to work properly when installed. This allows it to save configurations, write session logs and save its state on the device. This way, Nemesis can also be updated without having to clone the full repository again. The updater preserves configurations, removes logs, cache files and outdated executables and replaces them with the latest ones.  
 However, for some functions to work consistently, elevated permissions are recommended. These are:  
-- Hash generation through WinAPI (Device ID / Ban system / Module authenticator)
-- Writing/Reading cache files (Transfer file for sending commands to modules / Lock file / Configuration files)
+- Hash generation through WinAPI (Device ID / Ban system / Module authenticator)  
+- Writing/Reading cache files (Transfer file for sending commands to modules / Lock file / Configuration files)  
   
-Some modules may require these or other capabilities to function properly. If Nemesis runs/opens the modules itself, then the permissions will be inherited (due to how WinAPI permission elevation inheritance works).
+Some modules may require these or other capabilities to function properly. If Nemesis runs/opens the modules itself, then the permissions will be inherited (due to how WinAPI permission elevation inheritance works).  
+  
+Nemesis when installed, uses the following file structure:  
+```
+%AppData%\Nemesis
+│   NemesisProject.exe
+│   NemesisInstaller.exe
+│   NemesisUninstaller.exe
+│
+├───assets
+│       mainfest.txt
+│       nemesisicon.ico
+│       nemesisicon.png
+│       GREENnemesis.png
+│       REDnemesis.png
+│
+├───config
+│       version.cfg
+│       settings.cfg
+│       neoconfig.cfg
+│       neoghconfig.cfg
+│       macroconfig.cfg
+│
+├───logs
+│       session_yyyy-mm-dd-hh-mm-ss.log
+│
+└───modules
+        manifest.txt
+        neoadaptiveHandler.exe
+        neoguiHandler.exe
+        macroHandler.exe
+```  
+- The folder includes the installer and uninstaller executables (for updating or deleting the program). 
+- **Assets** includes the required asset files (images for the GUI and the .ico file for creating a shortcut during installation or for the startup task).  
+- **Config** stores the user's configuration files and the version identifier.  
+- **Logs** stores the session logs (latest 10 logs are kept and logs older than 28 days are automatically removed when the program is initialized).  
+- **Modules** includes a basic set of modules and space for additional modules.  
   
 ## Using Nemesis Project
 ### Initialization
@@ -55,7 +91,7 @@ Upon starting, Nemesis checks for multiple things
 - current elevation level  
 - whether it is running the latest version  
 - the ability to generate hashes through WinAPI  
-- the ability to fetch databases online
+- the ability to fetch databases online  
   
 Warning and info messages are shown depending on the outputs of these checks. Some warnings terminate the app (version, hash generation, databases), the rest just show and warning and restrict some functions.  
 After this, the host device is validated. If the custom Device ID is not specifically listed as banned, the app proceeds.
@@ -77,12 +113,6 @@ Or if an attach request failed (no modules were running at the time of the attac
 <img width="616" height="320" alt="image" src="https://github.com/user-attachments/assets/5781b0da-de29-49bb-b62c-941fb9ded7f9" />  
   
 The attacher currently recognizes 12 modules. Out of which, 6 are available for commercial use, and 6 are only accessible to developers and testers  
-Attaching is the first and most important command for Nemesis. This command checks for modules, attaches them to make them monitor the command log and respond in real-time.  
-The second command is Flash, which tells every module to check for a relay file, which contains information that has to be sent between two modules, and load the information from that file into their cache.  
-The third command sends every attached module a command to exit. The modules reading it will perform an autosave and quit.  
-The fourth command simply launches the executables of the modules. Due to the `#SingleInstance, force` paramenter, this will close any previous instance of the modules and open them fresh.  
-The fifth command is very similar to the third one, but this one sends a command to reload. This means the processes don't quit, but they restart themselves from the beginning, as if they were just launched.  
-The last button simply tells every attached module to exit, performs a cleanup task, then exits Nemesis itself.  
   
 ### Configuring the launcher: Launcher/Settings
 By pressing the [%] button, a new window will open. This is the settings GUI for the launcher  
@@ -95,8 +125,8 @@ The following settings and buttons appear:
 - Auto-attach: runs the attach command a few milliseconds after a full initialization. Automatically attaches modules that get launched by Nemesis.  
 - Silent Startup: Nemesis suppresses all errors and warnings when starting. Also doesn't show any GUI when initialized or when attaching new modules. (Forced TRUE by Perforamce mode)  
 - Prevent logging: Suppresses the logging mechanism, only allowing it to write the Init logs and essential entries.  
-- Auto-login (developer mode only): Automatically passes the last valid username to the login panel and logs the user in during Init  
-- Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher  
+- Auto-login (developer mode only): Automatically passes the last valid username to the login panel and logs the user in during init.  
+- Performance mode: Makes all GUIs get destroyed instead of minimizing/hiding them. Also forces performance-optimal settings across the launcher.  
 - Display warnings: If disabled, no error prompts and popups are shown. (Forced FALSE by Performance mode)  
 - First launch message: If enabled, displays the welcome message on startup.
   
@@ -107,6 +137,48 @@ The following settings and buttons appear:
   
 **Developer settings tab:**  
 - Enable developer mode: Displays a login window for testers or developers to log in. Developer perks are elaborated later.  
+  
+### First-time usage of Nemesis Project
+When used for the first time, Nemesis creates its configuration files and saves the default settings inside. This file is located at `%appdata%\Nemesis\config\settings.cfg`.  
+Nemesis will show a prompt that confirms first-time usage and give a brief introduction to the main features.  
+We advise all our users to watch the setup and usage tutorial videos to learn how to configure and use basic official modules. Our current tutorials are these two:  
+- [Setup tutorial for Nemesis Project 2.0.0 and configuration guide for the NEO module architecture](https://youtu.be/migIf3go_IM)
+- [Manual install tutorial for Nemesis Project and configuration guide for the Legacy module architecture](https://youtu.be/YWq68EAmDMo)
 
-TO BE CONTINUED
-EOF
+### Using the launcher
+The launcher panel's left side gives the user a list of functions to use:  
+  
+<img width="620" height="318" alt="image" src="https://github.com/user-attachments/assets/3ee0e229-a356-4673-9670-5615aac3db7c" />  
+  
+
+- **Attach active modules:** Corresponds to the Alt+L hotkey. Attempts to send a signal to every recognized module and waits for a response. If a response is received, Nemesis considers that module active and adds it to the list of attached modules, allowing users to interact with the module.
+- **Flash configurations:** Corresponds to the Alt+H hotkey. Sends a signal to every attached module, telling them to check for a flash file and load the configurations from there. This allows modules to communicate under the absolute supervision of the user. No module reads or writes files without asking. An example use of this command is when a configuration from a GuiHandler module is ready to be transferred to an execution module.
+- **Exit all attached modules:** Self-explainatory. Sends a signal to every attached module, telling them to exit.
+- **Launch / Relaunch all modules:** Self-explainatory, runs every module file detected. Due to the `#SingleInstance, force` paramenter, this will close any previous instance of the modules and open them freshly.
+- **Restart attached modules:** Similarly to the *Exit all* command, this command tells every attached module to exit and restart.
+- **Exit Nemesis Project:** This command first tells every module to exit, then performs a cleanup routine and closes the launcher.
+
+### Using modules
+In Nemesis Project, most functionality is done through the module system.  
+The flow of processing inputs looks like this:  
+```mermaid
+flowchart LR
+    A[Input] --> Z(Launcher)
+    Z --> Y{Is this input required?}
+    Y --> |Yes, by the launcher| W[Intercept fully]
+    W --> V[Handle input]
+    V --> U[Defined output]
+    Y --> |Yes, by a module| X[Intercept as passthrough]
+    X --> B{Which module requires this input?}
+    B --> |Module1 requires input A| C[Module1 destination in relay file]
+    C --> D[Module1]
+    B --> |Module2 requires input B| E[Module2 destination in relay file]
+    E --> F[Module2]
+    Y --> |No| G[Do not intercept]
+    D --> H[Input parser]
+    F --> I[Input parser]
+    H --> J[Defined output]
+    I --> K[Defined output]
+```  
+We consider modules robust enough to require their own documentations. This documentation is only to help with general use, not module-specific features.  
+Alongside the native module framework developed for Nemesis, we're actively developing a module framework in AutoHotkey v2. The current framework is simple enough that it should perfectly be able to work with new module architectures, regardless of programming language (for example, Python 3.12< or even Rust or C#/C++). Nemesis itself (and the official modules) are native AutoHotkey products, therefore non-AutoHotkeyv1 module support is not officially maintained.
